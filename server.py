@@ -37,9 +37,9 @@ def docking(course, teamCode):
 @app.route("/obstacleAvoidance/<course>/<teamCode>", methods=['GET'])
 def obstacleAvoidance(course=None, teamCode=None):
     # validar llamada
-    if course == None or teamCode == None:
+    if course is None or teamCode is None:
         return json.dumps({"error": True, "msg": "course or teamCode None"}), 400, {"ContentType":"application/json"}
-    
+
     pattern = re.compile("[a-zA-Z]{2,5}")
     # validar curso
     if course == "courseA":

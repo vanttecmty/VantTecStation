@@ -3,16 +3,18 @@ import json
 import re # modulo de regex
 from flask import request
 
+REQUESTS_LOG = {}
+
 @app.route("/interop/image/<course>/<teamCode>", methods=["POST"])
 def interopImg(course=None, teamCode=None):
-     # validar llamada
+    # validar llamada
     if course is None or teamCode is None:
         return json.dumps({
             "error": True,
             "msg": "course or teamCode None"
         }), 400, {"ContentType":"application/json"}
 
-    pattern = re.compile("[a-zA-Z]{2,5}")
+    pattern = re.compile("[a-zA-Z]{2,5}$")
 
     # validar curso
     if course == "courseA":

@@ -5,7 +5,7 @@ from server import app
 @app.route("/", methods=["GET"])
 def hello():
     '''Funcion de testing para servidor'''
-    return "Hello World!"
+    return "Hello Vantec!"
 
 @app.route("/followLeader/<course>/<teamCode>", methods=["GET"])
 def follow_leader(course, teamCode):

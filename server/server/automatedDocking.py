@@ -11,7 +11,7 @@ def automatedDocking(course=None, teamCode=None):
             "msg": "course or teamCode None"
         }), 400, {"ContentType":"application/json"}
 
-    pattern = re.compile("[a-zA-Z]{2,5}")
+    pattern = re.compile("[a-zA-Z]{2,5}$")
     # validar curso
     if course == "courseA":
         # validate team

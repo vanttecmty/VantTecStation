@@ -9,51 +9,35 @@ REQUESTS_LOG = {}
 def interopImg(course=None, teamCode=None):
     # validar llamada
     if course is None or teamCode is None:
-        return json.dumps({
-            "error": True,
-            "msg": "course or teamCode None"
-        }), 400, {"ContentType":"application/json"}
+        return 'Not OK'
 
     pattern = re.compile("[a-zA-Z]{2,5}$")
-
     # validar curso
     if course == "courseA":
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return
+            return '200'
         else:
             # error
-            return json.dumps({
-                "error": True,
-                "msg": "cannot find team"
-            }), 404, {"ContentType":"application/json"}
+            return '404'
 
     elif course == "courseB":
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return
+            return '200'
         else:
             # error
-            return json.dumps({
-                "error": True,
-                "msg": "cannot find team"
-            }), 404, {"ContentType":"application/json"}
+            return '404'
 
     elif course == "openTest":
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return
+            return '200'
         else:
             # error
-            return json.dumps({
-                "error": True,
-                "msg": "cannot find team"
-            }), 404, {"ContentType":"application/json"}
+            return '500'
     else:
-        return json.dumps({
-            "error": True,
-            "msg": "Cannot find course"
-        }), 404, {"ContentType":"application/json"}
+        return 'Nope'

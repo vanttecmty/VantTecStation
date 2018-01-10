@@ -1,15 +1,19 @@
-from server import app
-import json
+from server import app # app para las rutas
+import json # modulo de jsons
 import re # modulo de regex
-from flask import request
+from flask import request # ver requests recibidas en flask
+import sys # usar system path
 
-REQUESTS_LOG = {}
+
+def eprint(*args, **kwargs):
+    '''Funcion de ayuda para hacer print a consola'''
+    print(*args, file=sys.stderr, **kwargs)
 
 @app.route("/interop/image/<course>/<teamCode>", methods=["POST"])
 def interopImg(course=None, teamCode=None):
     # validar llamada
     if course is None or teamCode is None:
-        return 'Not OK'
+        return "Not OK"
 
     pattern = re.compile("[a-zA-Z]{2,5}$")
     # validar curso
@@ -17,27 +21,27 @@ def interopImg(course=None, teamCode=None):
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return '200'
+            return "200"
         else:
             # error
-            return '404'
+            return "404"
 
     elif course == "courseB":
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return '200'
+            return "200"
         else:
             # error
-            return '404'
+            return "404"
 
     elif course == "openTest":
         # validate team
         if pattern.match(teamCode):
             # status 200
-            return '200'
+            return "200"
         else:
             # error
-            return '500'
+            return "500"
     else:
-        return 'Nope'
+        return "Nope"

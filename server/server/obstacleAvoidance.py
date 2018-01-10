@@ -1,5 +1,5 @@
-from server import app
-import json
+from server import app # app para agregar rutas
+import json # modulo de json
 import re # modulo de regex
 
 @app.route("/obstacleAvoidance/<course>/<teamCode>", methods=["GET"])

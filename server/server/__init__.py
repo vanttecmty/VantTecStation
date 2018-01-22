@@ -14,6 +14,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'png', 'jpg', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+COURSES = set(['courseA', 'courseB', 'openTest'])
+
 def eprint(*args, **kwargs):
     '''Funcion de ayuda para hacer print a consola'''
     print(*args, file=sys.stderr, **kwargs)
@@ -46,4 +48,4 @@ def upload_file(file):
 from server.functions import *
 from server.automatedDocking import automatedDocking
 from server.obstacleAvoidance import obstacleAvoidance
-from server.interopImg import interopImg
+from server.interopImg import interopImg, reportImg

@@ -1,6 +1,4 @@
-from server import app, COURSES # app para agregar rutas
-import json # modulo de json
-import re # modulo de regex
+from server import app, COURSES, TEAM_PATTERN # app para agregar rutas
 from flask import jsonify, request, make_response
 from random import randint
 
@@ -12,10 +10,8 @@ def pingLoc(course, teamCode):
     if course is None or teamCode is None:
         return jsonify(status=400, msg="Request is malformed")
 
-    pattern = re.compile("[a-zA-Z]{2,5}$")
-
     if course in COURSES:
-        if pattern.match(teamCode):
+        if TEAM_PATTERN.match(teamCode):
             buoyColor1Flag = request.data.get("buoyColor1", 0) in COLORS
             buoyColor2Flag = request.data.get("buoyColor2", 0) in COLORS
             frequency1Flag = 25 <= int(request.data.get("frequency1", 0)) <= 40

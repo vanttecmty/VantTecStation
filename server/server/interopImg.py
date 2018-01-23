@@ -1,6 +1,4 @@
-from server import app, upload_file, eprint, COURSES # app para las rutas
-import json # modulo de jsons
-import re # modulo de regex
+from server import app, upload_file, eprint, COURSES, TEAM_PATTERN # app para las rutas
 from flask import request, make_response, after_this_request, jsonify, flash # ver requests recibidas en flask
 
 
@@ -16,12 +14,11 @@ def interopImg(course=None, teamCode=None):
         return make_response(jsonify(succes=False, msg="No incluye archivo"), 400)
 
     file = request.files['file']
-    pattern = re.compile("[a-zA-Z]{2,5}$")
 
     # validar curso
     if course in COURSES:
         # validar team
-        if pattern.match(teamCode):
+        if TEAM_PATTERN.match(teamCode):
             # status 200
             return upload_file(file)
     return make_response(jsonify(success=False, msg="Cannot find team or course"), 404)
@@ -32,10 +29,8 @@ def reportImg(course=None, teamCode=None):
     if course is None or teamCode is None:
         return jsonify(status=400, message="Request is malformed")
 
-    pattern = re.compile("[a-zA-Z]{2,5}$")
-
     if course in COURSES:
-        if pattern.match(teamCode):
+        if TEAM_PATTERN.match(teamCode):
             eprint(request.data["shape"])
             return make_response(jsonify(success=True), 200)
     return make_response(jsonify(success=False, msg="Cannot find course or team"), 404)

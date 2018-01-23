@@ -1,13 +1,12 @@
-from server import app, COURSES
+from server import app, COURSES, TEAM_PATTERN
 import json
-import re # modulo de regex
 from flask import jsonify, make_response
 from random import randint
 
 COLORS = ["red", "green", "blue"]
 SYMBOLS = ["cruciform", "triangle", "circle"]
-COLORS_LEN = len(COLORS)
-SYM_LEN = len(SYMBOLS)
+COLORS_LEN = len(COLORS) - 1
+SYM_LEN = len(SYMBOLS) - 1
 
 @app.route("/automatedDocking/<course>/<teamCode>", methods=["GET"])
 def automatedDocking(course=None, teamCode=None):
@@ -16,20 +15,19 @@ def automatedDocking(course=None, teamCode=None):
     if course is None or teamCode is None:
         return make_response(jsonify(success=False, msg="Request is malformed"), 400)
 
-    pattern = re.compile("[a-zA-Z]{2,5}$")
     # validar curso
     if course in COURSES:
         # validate team
-        if pattern.match(teamCode):
+        if TEAM_PATTERN.match(teamCode):
             return json.dumps({
                 "dockingBaySequence": [
                     {
-                        "symbol": SYMBOLS[randint(0, SYM_LEN - 1)],
-                        "color": COLORS[randint(0, COLORS_LEN - 1)]
+                        "symbol": SYMBOLS[randint(0, SYM_LEN)],
+                        "color": COLORS[randint(0, COLORS_LEN)]
                     },
                     {
-                        "symbol": SYMBOLS[randint(0, SYM_LEN - 1)],
-                        "color": COLORS[randint(0, COLORS_LEN - 1)]
+                        "symbol": SYMBOLS[randint(0, SYM_LEN)],
+                        "color": COLORS[randint(0, COLORS_LEN)]
                     }
                 ]
             }), 200, {"ContentType":"application/json"}

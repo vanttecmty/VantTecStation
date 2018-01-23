@@ -4,6 +4,7 @@ from flask import jsonify, flash # modulo para regresar jsons
 import os # acceso al sistema
 import uuid # modulo para ids unicos
 import sys # usar system path
+import re # modulo para regex
 # http://flask.pocoo.org/docs/0.12/quickstart/
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -15,6 +16,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 COURSES = set(['courseA', 'courseB', 'openTest'])
+TEAM_PATTERN = re.compile("[a-zA-Z]{2,5}$")
 
 def eprint(*args, **kwargs):
     '''Funcion de ayuda para hacer print a consola'''

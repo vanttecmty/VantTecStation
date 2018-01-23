@@ -1,7 +1,7 @@
 from server import app, COURSES
 import json
 import re # modulo de regex
-from flask import jsonify
+from flask import jsonify, make_response
 from random import randint
 
 COLORS = ["red", "green", "blue"]
@@ -14,7 +14,7 @@ def automatedDocking(course=None, teamCode=None):
     '''Funcion con curso para automated docking'''
     # validar llamada
     if course is None or teamCode is None:
-        return jsonify(status=400, msg="Request is malformed")
+        return make_response(jsonify(success=False, msg="Request is malformed"), 400)
 
     pattern = re.compile("[a-zA-Z]{2,5}$")
     # validar curso
@@ -33,4 +33,4 @@ def automatedDocking(course=None, teamCode=None):
                     }
                 ]
             }), 200, {"ContentType":"application/json"}
-    return jsonify(status=404, msg="Cannot find team or course")
+    return make_response(jsonify(success=False, msg="Cannot find team or course"), 404)

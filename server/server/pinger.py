@@ -1,7 +1,7 @@
 from server import app, COURSES # app para agregar rutas
 import json # modulo de json
 import re # modulo de regex
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from random import randint
 
 COLORS = ["yellow", "blue", "black", "green", "red"]
@@ -21,7 +21,7 @@ def pingLoc(course, teamCode):
             frequency1Flag = 25 <= int(request.data.get("frequency1", 0)) <= 40
             frequency2Flag = 25 <= int(request.data.get("frequency2", 0)) <= 40
             if buoyColor1Flag and buoyColor2Flag and frequency1Flag and frequency2Flag:
-                return jsonify(success=True)
-            return jsonify(success=False)
+                return make_response(jsonify(success=True), 200)
+            return make_response(jsonify(success=False, msg="Invalid color or freq"), 503)
 
-    return jsonify(status=404, msg="Cannot find team or course")
+    return make_response(jsonify(success=False, msg="Cannot find team or course"), 404)

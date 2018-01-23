@@ -25,6 +25,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def upload_file(file):
+    '''Funcion para subir archivo'''
     # validar que la llamada tiene archivo
     if file.filename == '':
         flash("No se selecciono archivo")
@@ -43,7 +44,7 @@ def upload_file(file):
         response.headers['Content-Type'] = 'application/json'
         response.headers['Content-Length'] = os.stat(file_path).st_size
         return response
-    return jsonify(error="Subir archivo de nuevo")
+    return make_response(jsonify(success=False, msg="Falta archivo o nombre valido"), 503)
 
 from server.functions import *
 from server.automatedDocking import automatedDocking

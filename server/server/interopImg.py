@@ -1,7 +1,7 @@
 from server import app, upload_file, eprint, COURSES # app para las rutas
 import json # modulo de jsons
 import re # modulo de regex
-from flask import request, after_this_request, jsonify, flash # ver requests recibidas en flask
+from flask import request, make_response, after_this_request, jsonify, flash # ver requests recibidas en flask
 
 
 @app.route("/interop/image/<course>/<teamCode>", methods=["POST"])
@@ -9,11 +9,11 @@ def interopImg(course=None, teamCode=None):
     '''Funcion para subir imagen'''
     # validar llamada
     if course is None or teamCode is None:
-        return jsonify(result="Not OK", error="Teamcode o course es None")
+        return make_response(jsonify(success=False, msg="Request is malformed"), 400)
 
     if 'file' not in request.files:
         flash('No incluye archivo')
-        return jsonify(error="No incluye archivo")
+        return make_response(jsonify(succes=False, msg="No incluye archivo"), 400)
 
     file = request.files['file']
     pattern = re.compile("[a-zA-Z]{2,5}$")
@@ -24,10 +24,7 @@ def interopImg(course=None, teamCode=None):
         if pattern.match(teamCode):
             # status 200
             return upload_file(file)
-        else:
-            # error
-            return jsonify(status=403, error="Codigo de equipo no permitido")
-    return jsonify(status=404, error="Curso no encontrado")
+    return make_response(jsonify(success=False, msg="Cannot find team or course"), 404)
 
 @app.route("/interop/report/<course>/<teamCode>", methods=["POST"])
 def reportImg(course=None, teamCode=None):
@@ -40,6 +37,5 @@ def reportImg(course=None, teamCode=None):
     if course in COURSES:
         if pattern.match(teamCode):
             eprint(request.data["shape"])
-            return jsonify(success=True)
-    return jsonify(status=404, message="Cannot find course or team")
-
+            return make_response(jsonify(success=True), 200)
+    return make_response(jsonify(success=False, msg="Cannot find course or team"), 404)

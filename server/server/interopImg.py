@@ -40,6 +40,6 @@ def reportImg(course=None, teamCode=None):
     if course in COURSES:
         if pattern.match(teamCode):
             eprint(request.data["shape"])
-            return jsonify(success=200)
+            return jsonify(success=True)
     return jsonify(status=404, message="Cannot find course or team")
 

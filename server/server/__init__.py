@@ -48,7 +48,6 @@ def upload_file(file):
         return response
     return make_response(jsonify(success=False, msg="Falta archivo o nombre valido"), 503)
 
-from server.functions import *
 from server.automatedDocking import automatedDocking
 from server.obstacleAvoidance import obstacleAvoidance
 from server.interopImg import interopImg, reportImg

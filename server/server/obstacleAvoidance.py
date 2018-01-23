@@ -12,7 +12,7 @@ def obstacleAvoidance(course=None, teamCode=None):
     '''Funcion para evadir obstaculo por un gate'''
     # validar llamada
     if course is None or teamCode is None:
-        return jsonify(status=400, msg="Request is malformed")
+        return make_response(jsonify(success=False, msg="Request is malformed"), 400)
 
     # validar curso
     if course in COURSES:

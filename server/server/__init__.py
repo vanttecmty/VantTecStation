@@ -52,3 +52,5 @@ from server.functions import *
 from server.automatedDocking import automatedDocking
 from server.obstacleAvoidance import obstacleAvoidance
 from server.interopImg import interopImg, reportImg
+from server.pinger import pingLoc
+from server.run import start, end

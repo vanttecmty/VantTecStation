@@ -21,7 +21,9 @@ def obstacleAvoidance():
             boatInfo["timestamp"] = datetime.now()
             print("------------- HEARTBEAT --------------")
             print(boatInfo)
+            print("--------------------------------------")
             r = requests.post(url=HEARTBEAT, data=boatInfo)
+            time.sleep(0.4)
         time.sleep(2)
     print("------------ Finished obstacle avoidance -----------")
 

@@ -51,5 +51,6 @@ def upload_file(file):
 from server.automatedDocking import automatedDocking
 from server.obstacleAvoidance import obstacleAvoidance
 from server.interopImg import interopImg, reportImg
+from server.heartbeat import logHeart
 from server.pinger import pingLoc
 from server.run import start, end

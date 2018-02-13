@@ -10,7 +10,7 @@ HEARTBEAT = "http://localhost:5000/heartbeat/courseA/VNTEC"
 
 def obstacleAvoidance():
     '''Funcion de prueba de obstacle avoidance'''
-    boatInfo = {"challenge": "obstacle avoidance"}
+    boatInfo = {"challenge": "OBSTACLE AVOIDANCE"}
 
     for i in range(5):
         r = requests.get(OBSTACLE_AVOIDANCE)
@@ -30,7 +30,7 @@ def obstacleAvoidance():
 
 def automatedDocking():
     '''Funcion de prueba de automated docking'''
-    boatInfo = {"challenge": "automated docking"}
+    boatInfo = {"challenge": "AUTOMATED DOCKING"}
     r = requests.get(AUTOMATED_DOCKING)
     data = r.json()
     print(data)

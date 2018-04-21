@@ -102,3 +102,5 @@ ENV/
 
 *.jpg
 *.png
+*.out
+*.exe

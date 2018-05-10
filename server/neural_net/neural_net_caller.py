@@ -4,7 +4,7 @@ import sys
 
 def main():
     child = Popen(
-        ['C:\\Users\\Julio\\Documents\\a.exe'],
+        [sys.executable, '-u', 'test_program.py'],
         stdin=PIPE,
         stdout=PIPE,
         bufsize=1,
@@ -12,11 +12,11 @@ def main():
 
     commandlist = ['Luke', 'Mike', 'Jonathan', 'Exit']
     for command in commandlist:
-        print('From PIPE: Q:', child.stdout.readline())
+        print('From PIPE: Q:', child.stdout.readline().rstrip('\n'))
         print(command, file=child.stdin)
         #### child.stdin.flush()
         if command != 'Exit':
-            print('From PIPE: A:', child.stdout.readline())
+            print('From PIPE: A:', child.stdout.readline().rstrip('\n'))
     child.stdin.close()  # no more input
     assert not child.stdout.read()  # should be empty
     child.stdout.close()

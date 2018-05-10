@@ -5,7 +5,7 @@ int main()
 {
     char filename[256];
     while(1) {
-        printf("Enter filename: \n");
+        printf("Enter name: \n");
         scanf("%s", filename);
         if (!strcmp(filename, "Exit")) {
             break;

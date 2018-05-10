@@ -4,17 +4,14 @@ import sys
 
 def main():
     child = popen_spawn.PopenSpawn('./a.exe')
-    #child.logfile = sys.stdout
-    child.expect('Enter name: \n')
+    # child.logfile = sys.stdout
+    child.expect('.*')
     child.sendline('Luke')
-    child.expect('Tu nombre es Luke\n')
-    child.expect('Enter name: \n')
+    child.expect('.*')
     child.sendline('Mike')
-    child.expect('Tu nombre es Mike\n')
-    child.expect('Enter name: \n')
+    child.expect('.*')
     child.sendline('Jonathan')
-    child.expect('Tu nombre es Jonathan\n')
-    child.expect('Enter name: \n')
+    child.expect('.*')
     child.sendline('Exit')
 
 main()
